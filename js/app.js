@@ -1,16 +1,12 @@
 (function (){
   console.log("works");
 
+
   function reqListener(){
     var response = JSON.parse(this.responseText);
-    console.log(response.name);
+    console.log(response.homeworld);
     var p4n = document.getElementById("person4Name");
     p4n.innerHTML = response.name;
-
-    var p4hw = document.getElementById("person4HomeWorld");
-    p4hw.innerHTML = getHomeWorld(response.homeworld);
-
-
   }
 
   function getPerson(id){
@@ -20,19 +16,22 @@
     oReq.send();
   }
 
-  function getHomeWorld(hw){
-    var hReq = new XMLHttpRequest();
-    hReq.addEventListener('load', reqListener);
-    hReq.open('GET', hw);
-    hReq.send();
+  function reqListener2(){
+    var response = JSON.parse(this.responseText);
+    var p4hw = document.getElementById("person4HomeWorld");
+    p4hw.innerHTML = response.name;
   }
 
-var luke = getPerson(1);
-console.log(luke);
+  function getHomeworld(id){
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener('load', reqListener2);
+    oReq.open('GET', `http://swapi.co/api/people/${id}`);
+    oReq.send();
+  }
 
-var p4 = document.getElementById("person4Name");
-//p4[0].innerHTML = luke.name;
-console.log(p4);
+
+getPerson(4);
+getHomeworld(1);
 
 
 })();
