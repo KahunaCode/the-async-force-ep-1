@@ -71,7 +71,40 @@
   })();
 
 
+  var filmListContainer = document.getElementById('filmList');
+
+  function reqListener(){
+    var res = JSON.parse(this.responseText);
+    //console.log(res);
+    for (var i = 0, len = res.results.length; i < len; i++) {
+      var filmContainer = document.createElement("li");
+      filmContainer.className = "film";
+
+      //make h2's
+      var filmTitleContainer = document.createElement("h2");
+      filmTitleContainer.className = "filmTitle";
+      //console.log("title:", res.results[i].title);
+      filmTitleContainer.innerHTML = res.results[i].title;
+      filmContainer.appendChild(filmTitleContainer);
+
+      var planetHeading = document.createElement("h3");
+      var filmPlanetsContainer = document.createElement("ul");
+      filmPlanetsContainer.className = "filmPlanets";
+
+      filmContainer.appendChild(planetHeading);
 
 
+
+      filmListContainer.appendChild(filmContainer);
+
+    }
+
+
+  }
+
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open('GET', 'http://swapi.co/api/films/');
+  oReq.send();
 
 })();
