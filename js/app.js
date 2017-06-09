@@ -116,11 +116,7 @@
       }
 
       planetHeading.appendChild(filmPlanetsContainer);
-
       filmContainer.appendChild(planetHeading);
-
-
-
       filmListContainer.appendChild(filmContainer);
 
     }
