@@ -32,6 +32,7 @@
       oReq.open('GET', `http://swapi.co/api/people/${id}`);
       oReq.send();
     }
+    //fires function and http requests
     getPerson(4);
   })();
 
@@ -65,8 +66,10 @@
       oReq.open('GET', `http://swapi.co/api/people/${id}`);
       oReq.send();
     }
+        //fires function and http requests
     getPerson(14);
   })();
+
 
 
 
