@@ -91,6 +91,20 @@
       var filmPlanetsContainer = document.createElement("ul");
       filmPlanetsContainer.className = "filmPlanets";
 
+      //for (var j = 0; j < )
+        var planetli = document.createElement("li");
+        planetli.className = "planet";
+
+        var planetName = document.createElement("h4");
+        planetName.className = "planetName";
+        planetName.innerHTML = "this is the planet name i want";
+
+        planetli.appendChild(planetName);
+        filmPlanetsContainer.appendChild(planetli);
+
+
+      planetHeading.appendChild(filmPlanetsContainer);
+
       filmContainer.appendChild(planetHeading);
 
 
