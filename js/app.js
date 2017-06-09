@@ -75,7 +75,7 @@
 
   function reqListener(){
     var res = JSON.parse(this.responseText);
-    //console.log(res);
+    console.log(res);
     for (var i = 0, len = res.results.length; i < len; i++) {
       var filmContainer = document.createElement("li");
       filmContainer.className = "film";
@@ -91,17 +91,29 @@
       var filmPlanetsContainer = document.createElement("ul");
       filmPlanetsContainer.className = "filmPlanets";
 
-      //for (var j = 0; j < )
-        var planetli = document.createElement("li");
-        planetli.className = "planet";
+      for (var p = 0; p < res.results[i].planets.length; p++){
+        (function(myPlanets){
+          var pReq = new XMLHttpRequest();
+          //console.log("preq", pReq);
+          pReq.addEventListener("load", function(){
+            var pRes = JSON.parse(this.responseText);
+            //console.log(pRes);
+            var planetListItemContainer = document.createElement("li");
+            planetListItemContainer.className = "planet";
 
-        var planetName = document.createElement("h4");
-        planetName.className = "planetName";
-        planetName.innerHTML = "this is the planet name i want";
+            var myPlanet = document.createElement("h4");
+            myPlanet.className = "planetName";
+            myPlanet.innerHTML = pRes.name;
 
-        planetli.appendChild(planetName);
-        filmPlanetsContainer.appendChild(planetli);
+            planetListItemContainer.appendChild(myPlanet);
+            myPlanets.appendChild(planetListItemContainer);
 
+          });
+
+          pReq.open('GET', res.results[i].planets[p]);
+          pReq.send();
+        })(filmPlanetsContainer);
+      }
 
       planetHeading.appendChild(filmPlanetsContainer);
 
