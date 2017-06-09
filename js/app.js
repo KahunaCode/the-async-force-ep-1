@@ -1,56 +1,38 @@
 (function (){
   console.log("works");
 
+  //get person 4 info and create innerHTML's
+  (function (){
+    function reqListener(){
+      var response = JSON.parse(this.responseText);
+      console.log(response.homeworld);
+      (function(){
+        function reqListener2(){
+          var response = JSON.parse(this.responseText);
+          var p4hw = document.getElementById("person4HomeWorld");
+          p4hw.innerHTML = response.name;
+        }
 
-  function reqListener(){
-    var response = JSON.parse(this.responseText);
-    console.log(response.homeworld);
+        function getHomeworld(id){
+          var oReq = new XMLHttpRequest();
+          oReq.addEventListener('load', reqListener2);
+          oReq.open('GET', id);
+          oReq.send();
+        }
+        getHomeworld(response.homeworld);
 
-    (function(){
-      //console.log("iife "+response.homeworld);
-      function reqListener2(){
-        var response = JSON.parse(this.responseText);
-        var p4hw = document.getElementById("person4HomeWorld");
-        p4hw.innerHTML = response.name;
-      }
+      })();
+      var p4n = document.getElementById("person4Name");
+      p4n.innerHTML = response.name;
+    }
 
-      function getHomeworld(id){
-        var oReq = new XMLHttpRequest();
-        oReq.addEventListener('load', reqListener2);
-        //oReq.open('GET', `http://swapi.co/api/people/${id}`);
-        oReq.open('GET', id);
-        oReq.send();
-      }
-      getHomeworld(response.homeworld);
-
-    })();
-    var p4n = document.getElementById("person4Name");
-    p4n.innerHTML = response.name;
-  }
-
-  function getPerson(id){
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener('load', reqListener);
-    oReq.open('GET', `http://swapi.co/api/people/${id}`);
-    oReq.send();
-  }
-
-  // function reqListener2(){
-  //   var response = JSON.parse(this.responseText);
-  //   var p4hw = document.getElementById("person4HomeWorld");
-  //   p4hw.innerHTML = response.name;
-  // }
-
-  // function getHomeworld(id){
-  //   var oReq = new XMLHttpRequest();
-  //   oReq.addEventListener('load', reqListener2);
-  //   oReq.open('GET', `http://swapi.co/api/people/${id}`);
-  //   oReq.send();
-  // }
-
-
-getPerson(4);
-// getHomeworld(1);
-
+    function getPerson(id){
+      var oReq = new XMLHttpRequest();
+      oReq.addEventListener('load', reqListener);
+      oReq.open('GET', `http://swapi.co/api/people/${id}`);
+      oReq.send();
+    }
+    getPerson(4);
+  })();
 
 })();
